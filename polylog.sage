@@ -754,7 +754,7 @@ class ThetaSharpOperator:
         to polylogarithms up to Li_d and elements of \O(\Pi_d) of degree at most degree.
         
         While the output of this function is provably a lower bound, it is almost certainly
-        an upper bound two, with the likelihood of success increasing on successive iterations
+        an upper bound too, with the likelihood of success increasing on successive iterations
         '''
         
         if test_integers:
