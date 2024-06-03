@@ -587,7 +587,6 @@ class ThetaSharpOperator:
         if random_evaluation and not eval_dict:
             raise ValueError('Evaluation dictionary not passed to function')
 
-
         #If the value has already been computed, do not repeat the computation
         if random_evaluation:
             if f'Li{n}' in self.li_values_random_dict:
@@ -617,11 +616,16 @@ class ThetaSharpOperator:
 
                 if random_evaluation:
                     coefficient = ThetaSharpOperator.evaluate(coefficient, eval_dict)
-                    #coefficient = QQ(coefficient.subs(eval_dict))
-                #The variable is prod(\Phi_{e_0}^{\tau_p} : tau_p in word)\Phi_{e_1}^{tau_letter} 
-                monomial = prod([algebra(self.tau_letter_to_phi_dict[letter]) for letter in word]) 
-                monomial *= algebra(self.tau_letter_to_phi_e1_dict[tau_letter])
+                    
+                    #The variable is prod(\Phi_{e_0}^{\tau_p} : tau_p in word)\Phi_{e_1}^{tau_letter}                
+                    monomial = prod([algebra(self.tau_letter_to_phi_dict[letter]) for letter in word]) 
+                    monomial *= algebra(self.tau_letter_to_phi_e1_dict[tau_letter])
 
+                else:
+                    #The variable is prod(\Phi_{e_0}^{\tau_p} : tau_p in word)\Phi_{e_1}^{tau_letter}                
+                    monomial = prod([algebra.gens_dict()[str(self.tau_letter_to_phi_dict[letter])] for letter in word]) 
+                    monomial *= algebra.gens_dict()[str(self.tau_letter_to_phi_e1_dict[tau_letter])]
+                
                 li_value += coefficient * monomial
                 
         #Compute the coefficients that have a sigma variable sigma_{2k+1}
@@ -643,10 +647,14 @@ class ThetaSharpOperator:
                     coefficient = ThetaSharpOperator.evaluate(coefficient, eval_dict)
                     #coefficient = QQ(coefficient.subs(eval_dict))
                 
-                #The variable is the product of \Phi_{e_0}^{\tau_p} for \tau_p appearing in the word,
-                #multiplied by \Phi_{e_0e_1...e_1}^{\sigma}
-                monomial = prod([algebra(self.tau_letter_to_phi_dict[letter]) for letter in word])
-                monomial *= algebra(self.sigma_letter_to_phi_dict[sigma_letter])
+                    #The variable is the product of \Phi_{e_0}^{\tau_p} for \tau_p appearing in the word,
+                    #multiplied by \Phi_{e_0e_1...e_1}^{\sigma}
+                    monomial = prod([algebra(self.tau_letter_to_phi_dict[letter]) for letter in word])
+                    monomial *= algebra(self.sigma_letter_to_phi_dict[sigma_letter])
+
+                else:
+                    monomial = prod([algebra.gens_dict()[str(self.tau_letter_to_phi_dict[letter])] for letter in word])
+                    monomial *= algebra.gens_dict()[str(self.sigma_letter_to_phi_dict[sigma_letter])]
 
                 li_value += coefficient * monomial
             
@@ -723,7 +731,10 @@ class ThetaSharpOperator:
         self.evaluate_theta_sharp_up_to_halfweight(halfweight, random_evaluation, eval_dict)
         
         polylog_monomials = ThetaSharpOperator.compute_monomials_in_polylogs(halfweight, degree)
-        phi_monomials = self.phi_algebra.monomials_of_degree(degree)
+        if random_evaluation:
+            phi_monomials = self.phi_algebra.monomials_of_degree(degree)
+        else:
+            phi_monomials = self.OU_phi_algebra.monomials_of_degree(degree)
         phi_monomials.reverse()
         
         theta_sharp_values = []
@@ -754,7 +765,7 @@ class ThetaSharpOperator:
         to polylogarithms up to Li_d and elements of \O(\Pi_d) of degree at most degree.
         
         While the output of this function is provably a lower bound, it is almost certainly
-        an upper bound too, with the likelihood of success increasing on successive iterations
+        an upper bound two, with the likelihood of success increasing on successive iterations
         '''
         
         if test_integers:
