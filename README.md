@@ -44,7 +44,7 @@ T.log() * T.Li(3) + T.Li(1)
 **To verify when $|S| = 2$ that the kernel of $`{\theta^{\#}_{17, 17}}`$ is trivial and the kernel of $`{\theta^{\#}_{17, 18}}`$ is at most one-dimensional** 
 
 ```
-# Process took 65 hours and 450GB of memory on The Ohio State University's HPC cluster.
+# Process took 66 hours and 432GB of memory on The Ohio State University's HPC cluster.
 compute_upper_bound_on_dimension_of_kernel(depth=17, parallel=True, nprocesses=95)
 ```
 
