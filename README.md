@@ -27,6 +27,18 @@ log = T.log()
 
 The output represents the letters $\sigma_3, \sigma_5, \sigma_7\ldots$ as $A, B, C, \ldots$ and $\tau_{p_1}, \tau_{p_2}, \tau_{p_3},\ldots$ for $`{S = \{p_1, p_2,p_3,\ldots\}}`$ as $a, b, c,\ldots$.
 
+The functions can be manipulated like polynomials:
+
+```
+T = ThetaSharpOperator(4, 2)
+
+T.log() * T.Li(1) + T.Li(3)
+# 3/2*Sa^2*phi0t0*phi1t0 + (Sa*Sb + Sab)*phi0t1*phi1t0 + (2*Sa*Sb - Sab)*phi0t0*phi1t1 + 3/2*Sb^2*phi0t1*phi1t1
+
+T.log() * T.Li(3) + T.Li(1)
+# 1/6*Sa^4*phi0t0^3*phi1t0 + (1/6*Sa^3*Sb + (Sa*Sab - Saab)*Sa)*phi0t0^2*phi0t1*phi1t0 + (Sa*Sabb + (Sa*Sab - Saab)*Sb)*phi0t0*phi0t1^2*phi1t0 + Sabb*Sb*phi0t1^3*phi1t0 + (1/2*(Sa^2*Sb - 2*Sa*Sab + 2*Saab)*Sa)*phi0t0^3*phi1t1 + (1/2*(Sa*Sb^2 - 2*Sabb)*Sa + 1/2*(Sa^2*Sb - 2*Sa*Sab + 2*Saab)*Sb)*phi0t0^2*phi0t1*phi1t1 + (1/6*Sa*Sb^3 + 1/2*(Sa*Sb^2 - 2*Sabb)*Sb)*phi0t0*phi0t1^2*phi1t1 + 1/6*Sb^4*phi0t1^3*phi1t1 + SA*Sa*phi0t0*phisigma3 + SA*Sb*phi0t1*phisigma3 + Sa*phi1t0 + Sb*phi1t1
+````
+
 <h3>To reproduce the results of the paper</h3>
 
 **To verify when $|S| = 2$ that the kernel of $`{\theta^{\#}_{17, 17}}`$ is trivial and the kernel of $`{\theta^{\#}_{17, 18}}`$ is at most one-dimensional** 
