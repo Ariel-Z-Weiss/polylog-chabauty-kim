@@ -2,8 +2,6 @@ import string
 from functools import cache
 from itertools import groupby
 import numpy
-import cProfile
-import pstats
 from multiprocessing import Pool, Manager
 
 
