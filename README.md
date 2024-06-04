@@ -10,7 +10,7 @@ It can also compute the exact dimension of this space, with high probability.
 
 <h1>Using the code</h1>
 
-<h3>To compute an upper bound (and probably a lower bound) of the dimension of ${\theta^{\#}_{d, v}}$ for $|S| = n$</h3>
+<h3>To compute a provable upper bound (and likely lower bound) of the dimension of ${\theta^{\#}_{d, v}}$ for $|S| = n$</h3>
 
 ```
 T = ThetaSharpOperator(d, n)
