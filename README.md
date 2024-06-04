@@ -4,7 +4,7 @@ Let $S$ be a finite set of primes and let $`{X = \mathbb{P}^1\setminus\{0,1,\inf
 
 It is used in the paper to give a provable upper bound on the dimension of the kernel of the map
 ```math
-\theta^{\#}_{d,v} \colon \mathcal{O}(U_S)_{\leq d}[\mathrm{log}^{\mathfrak{u}}, \mathrm{Li}_1^{\mathfrak{u}}, \mathrm{Li_2}^{\mathfrak{u}}, \ldots, \mathrm{Li_d}^{\mathfrak{u}}]_v \to \mathcal{O}(U_S)_{\leq d}[\Phi, d]+v
+\theta^{\#}_{d,v} \colon \mathcal{O}(U_S)_{\leq d}[\mathrm{log}^{\mathfrak{u}}, \mathrm{Li}_1^{\mathfrak{u}}, \mathrm{Li_2}^{\mathfrak{u}}, \ldots, \mathrm{Li_d}^{\mathfrak{u}}]_v \to \mathcal{O}(U_S)_{\leq d}[\Phi, d]_v
 ```
 It can also compute the exact dimension of this space, with high probability.
 
