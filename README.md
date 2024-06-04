@@ -27,7 +27,7 @@ log = T.log()
 
 The output represents the letters $\sigma_3, \sigma_5, \sigma_7\ldots$ as $A, B, C, \ldots$ and $\tau_{p_1}, \tau_{p_2}, \tau_{p_3},\ldots$ for $`{S = \{p_1, p_2,p_3,\ldots\}}`$ as $a, b, c,\ldots$.
 
-The functions can be manipulated like polynomials:
+The outputs can be manipulated like polynomials:
 
 ```
 T = ThetaSharpOperator(4, 2)
