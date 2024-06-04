@@ -1,10 +1,10 @@
 # Bounding the number of polylogarithmic Chabauty-Kim functions
 
-Let $S$ be a finite set of primes and let $`{X = \mathbb{P}^1\setminus\{0,1,\infty\}}`$ over $`{\mathbb Z_S}`$. This SageMath code is described in the paper "<a>Polylogarithmic motivic Chabauty--Kim for $\mathbb{P}^1 \setminus \{ 0,1,\infty \}$: \\ the geometric step via resultants</a>", by David Jarossay, David T.-B. G. Lilienfeldt, Francesco M. Saettone, Ariel Weiss, and Sa'ar Zehavi.
+Let $S$ be a finite set of primes and let $`{X = \mathbb{P}^1\setminus\{0,1,\infty\}}`$ over $`{\mathbb Z_S}`$. This SageMath code is described in the paper <i><a>Polylogarithmic motivic Chabauty--Kim for $`{\mathbb{P}^1 \setminus \{ 0,1,\infty \}}`$: the geometric step via resultants</a></i>, by David Jarossay, David T.-B. G. Lilienfeldt, Francesco M. Saettone, Ariel Weiss, and Sa'ar Zehavi.
 
 It is used in the paper to give a provable upper bound on the dimension of the kernel of the map
 ```math
-\theta^{\#}_{d,v} \colon \mathcal{O}(U_S)_{\leq d}[\mathrm{log}^{\mathfrak{u}}, \mathrm{Li}_1^{\mathfrak{u}}, \mathrm{Li_2}^{\mathfrak{u}}, \ldots, \mathrm{Li_d}^{\mathfrak{u}}]_v \to \mathcal{O}(U_S)_{\leq d}[\Phi, d]_v
+\theta^{\#}_{d,v} \colon \mathcal{O}(U_S)_{\leq d}[\mathrm{log}^{\mathfrak{u}}, \mathrm{Li}_1^{\mathfrak{u}}, \mathrm{Li}_2^{\mathfrak{u}}, \ldots, \mathrm{Li}_d^{\mathfrak{u}}]_v \to \mathcal{O}(U_S)_{\leq d}[\Phi, d]_v
 ```
 It can also compute the exact dimension of this space, with high probability.
 
