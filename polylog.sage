@@ -811,11 +811,8 @@ def main_non_parallel(depth):
     print(f"The number of Coleman functions in depth {depth} and weight 18 is {result2}")
 
 def compute_upper_bound_on_dimension_of_kernel(depth, parallel=False, nprocesses=8):
-    if paralell:
+    if parallel:
         main_parallel(depth, nprocesses)
     else:
         main_non_parallel(depth)
-    
-if __name__ == "__main__":
-    compute_upper_bound_on_dimension_of_kernel(6)
-    #compute_upper_bound_on_dimension_of_kernel(16, True, 95)
+
