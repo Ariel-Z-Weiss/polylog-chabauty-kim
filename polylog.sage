@@ -284,7 +284,7 @@ class ShuffleAlgebraImproved(sage.algebras.shuffle_algebra.ShuffleAlgebra):
 
     def to_dual_pbw_element_async(self, w, cache):
         """
-            A rewriting of the built in function ShuffleAlgebra.to_dual_pbw_element 
+            A rewriting of the built-in function ShuffleAlgebra.to_dual_pbw_element 
             to enable parallelisation. The only difference is that the cache
             that is normally used by expansion on basis is now handled manually
             rather than using the @cached_method decorator
