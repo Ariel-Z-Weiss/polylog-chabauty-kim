@@ -498,7 +498,7 @@ class ThetaSharpOperator:
 
     def generate_random_integers(self, clear=True, integer_range=100):
         '''
-        For each generator of sef.OU_S_ring, generate a random integer
+        For each generator of self.OU_S_ring, generate a random integer
         
         The point of including a gcd is to ensure that we are always working with integer arithmetic
         
