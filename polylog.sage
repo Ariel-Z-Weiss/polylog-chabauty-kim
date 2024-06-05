@@ -144,7 +144,7 @@ class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
      
     def _generate_lyndon_words_of_fixed_length(self, length, sigma_letters_and_degrees, tau_letters):
         """
-        Return a list of all the Lyndon words in our alphabet, of given, and containing
+        Return a list of all the Lyndon words in our alphabet, of given length, and containing
         at most one sigma letter.
         
         Inputs:
