@@ -1,6 +1,6 @@
 # Bounding the number of polylogarithmic Chabauty-Kim functions
 
-Let $S$ be a finite set of primes and let $`{X = \mathbb{P}^1\setminus\{0,1,\infty\}}`$ over $`{\mathbb Z_S}`$. This SageMath code is described in the paper <i><a>Polylogarithmic motivic Chabauty--Kim for $`{\mathbb{P}^1 \setminus \{ 0,1,\infty \}}`$: the geometric step via resultants</a></i>, by David Jarossay, David T.-B. G. Lilienfeldt, Francesco M. Saettone, Ariel Weiss, and Sa'ar Zehavi.
+Let $S$ be a finite set of primes and let $`{X = \mathbb{P}^1\setminus\{0,1,\infty\}}`$ over $`{\mathbb Z_S}`$. This SageMath code is described in the paper <i><a>Polylogarithmic motivic Chabauty-Kim for $`{\mathbb{P}^1 \setminus \{ 0,1,\infty \}}`$: the geometric step via resultants</a></i>, by David Jarossay, David T.-B. G. Lilienfeldt, Francesco M. Saettone, Ariel Weiss, and Sa'ar Zehavi.
 
 It is used in the paper to give a provable upper bound on the dimension of the kernel of the map
 ```math
@@ -10,7 +10,7 @@ It can also compute the exact dimension of this space, with high probability.
 
 <h1>Using the code</h1>
 
-<h3>To compute a provable upper bound (and likely lower bound) of the dimension of ${\theta^{\#}_{d, v}}$ for $|S| = n$</h3>
+<h3>To compute a provable upper bound (and likely lower bound) of the dimension of ${\ker(\theta^{\#}_{d, v})}$ for $|S| = n$</h3>
 
 ```
 T = ThetaSharpOperator(d, n)
@@ -41,7 +41,7 @@ T.log() * T.Li(3) + T.Li(1)
 
 <h3>To reproduce the results of the paper</h3>
 
-**To verify when $|S| = 2$ that the kernel of $`{\theta^{\#}_{17, 17}}`$ is trivial and the kernel of $`{\theta^{\#}_{17, 18}}`$ is at most one-dimensional** 
+**To verify when $|S| = 2$ that the kernel of $`{\theta^{\#}_{17, 17}}`$ is trivial and the kernel of $`{\theta^{\#}_{6, 18}}`$ is at most one-dimensional** 
 
 ```
 # Process took 66 hours and 432GB of memory on The Ohio State University's HPC cluster.
