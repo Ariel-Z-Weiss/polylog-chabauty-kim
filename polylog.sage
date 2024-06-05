@@ -302,7 +302,7 @@ class ShuffleAlgebraImproved(sage.algebras.shuffle_algebra.ShuffleAlgebra):
 
     def expansion_on_basis_async(self, w, cache):
         """
-            A copy of the built in expansion_on_basis function to enable parallelisation
+            A copy of the built-in expansion_on_basis function to enable parallelization
         """
         if w in cache:
             return cache[w]
