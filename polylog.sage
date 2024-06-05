@@ -445,14 +445,14 @@ class ThetaSharpOperator:
             In the parallel version, we first precompute to_dual_pbw_element on every
             word that can appear in some Li(n) up to the depth
         """
-    """
-    saar: I believe it may be nice if we write for each function what are its arguments and what is its output, beyond the one liner which says what its for. Something like:
-        Args:
-            depth (int): The depth up to which to generate words.
-
-        Yields:
-            ShuffleAlgebraImproved: Elements to precompute to_dual_pbw_element on for Li(n). (is that correct?)
-    """
+        """
+        saar: I believe it may be nice if we write for each function what are its arguments and what is its output, beyond the one liner which says what its for. Something like:
+            Args:
+                depth (int): The depth up to which to generate words.
+    
+            Yields:
+                ShuffleAlgebraImproved: Elements to precompute to_dual_pbw_element on for Li(n). (is that correct?)
+        """
         for n in range(1, depth + 1):
             for tau_letter in self.tau_letters:
                 for word in ShuffleAlgebraPolynomialRing.words_of_fixed_length(n-1, self.tau_letters):
@@ -475,7 +475,7 @@ class ThetaSharpOperator:
         to evaluate the polynomials
         '''
 
-         '''
+        '''
         saar: added some documentation which should later on be merged.
         Sets random integers for polynomial evaluation.
 
@@ -653,7 +653,7 @@ class ThetaSharpOperator:
         PolynomialDict: The Li(n) polynomial.
         """
 
-         """
+        """
         saar: this function is hellishly long, are we sure we do not want to break it into more pieces?
         saar: Returns the image of Li_n under theta_sharp.
 
@@ -904,4 +904,3 @@ def compute_upper_bound_on_dimension_of_kernel(depth, parallel=False, nprocesses
         main_parallel(depth, nprocesses)
     else:
         main_non_parallel(depth)
-
