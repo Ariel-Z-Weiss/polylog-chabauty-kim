@@ -527,7 +527,7 @@ class ThetaSharpOperator:
         """
         Evaluates a polynomial at the entries of a dictionary, eval_dict.
 
-        Previous iterations of this code used the built in .subs() method, which is very expensive!
+        Previous iterations of this code used the built-in .subs() method, which is very expensive!
 
         Returns: the evaluation of the polynomial, as a rational number.
         """
@@ -582,7 +582,7 @@ class ThetaSharpOperator:
         
     def log(self, random_evaluation=False, eval_dict=None):
         """
-        Returns the the image of log under theta_sharp. The output is a PolynomialDict 
+        Returns the image of log under theta_sharp. The output is a PolynomialDict 
         object whose coefficients are elements of a ShuffleAlgebraPolynomialRing object
         and whose monomials are elements of a PhiPolynomialRing object.
         
@@ -621,7 +621,7 @@ class ThetaSharpOperator:
             # Throw out the \Phi_{e_1}'s'
             if index >= self.number_of_primes: break
             
-            #Pick out the \tau_p corresepnding to \Phi_{e_0}^{\tau_p}
+            #Pick out the \tau_p corresponding to \Phi_{e_0}^{\tau_p}
             word = self.OU_S_ring.tau_letters[index][1]
             coefficient = self.OU_S_ring(f'S{word}')
             
@@ -642,7 +642,7 @@ class ThetaSharpOperator:
     
     def Li(self, n, random_evaluation=False, eval_dict=None):
         """
-        Returns the the image of Li_n under theta_sharp. The output is a PolynomialDict 
+        Returns the image of Li_n under theta_sharp. The output is a PolynomialDict 
         object whose coefficients are elements of a ShuffleAlgebraPolynomialRing object
         and whose monomials are elements of a PhiPolynomialRing object.
         
@@ -691,7 +691,7 @@ class ThetaSharpOperator:
         
         #Compute the coefficients that don't have any sigma variables
         #There is a coefficient for each pair consisting of a tau variable and a word in the
-        #tau varibles of length n-1.
+        #tau variables of length n-1.
         for tau_letter in self.tau_letters:
             for word in ShuffleAlgebraPolynomialRing.words_of_fixed_length(n-1, self.tau_letters):
                 #The coffiecient is f_{tau_letter + word}. Convert this word into the Lyndon basis, so it 
@@ -723,7 +723,7 @@ class ThetaSharpOperator:
             sigma_letter = sigma_letter_and_degree[1]
             
             for word in ShuffleAlgebraPolynomialRing.words_of_fixed_length(remaining_degree, self.tau_letters):
-                #The coffiecient is f_{sigma_letter + word}. Convert this word into the Lyndon basis, so it 
+                #The coefficient is f_{sigma_letter + word}. Convert this word into the Lyndon basis, so it 
                 #can be viewed as an element of self.OU_S_ring.
                 sentence = self.shuffle_algebra.to_dual_pbw_element(self.shuffle_algebra(sigma_letter + word))
                 coefficient = self.OU_S_ring.convert_from_shuffle_algebra(sentence)
@@ -803,8 +803,8 @@ class ThetaSharpOperator:
         return monomials
 
     def theta_sharp_matrix_in_given_degree(self, halfweight, degree, random_evaluation=False, eval_dict=None):
-        '''
-        Compute the matrix representing the action of theta^sharp the graded piece of O(\Pi_halfweight) of degree
+        ''' 
+        Compute the matrix representing the action of theta^sharp on the graded piece of O(\Pi_halfweight) of degree
         'degree', with respect to a monomial basis on O(\Pi_halfweight) and on O(U_S)[\Phi].
         
         The output will be a matrix whose coefficients are elements of O(U_S)_{\le halfweight}.
@@ -846,11 +846,11 @@ class ThetaSharpOperator:
     
     def upper_bound_on_dimension_of_kernel(self, halfweight, degree, test_integers=False, clear=True):
         '''
-        Compute a upper bound for the dimension of the kernel of theta^sharp, when restricted
+        Compute an upper bound for the dimension of the kernel of theta^sharp, when restricted
         to polylogarithms up to Li_d and elements of \O(\Pi_d) of degree at most degree.
         
-        While the output of this function is provably a lower bound, it is almost certainly
-        an upper bound two, with the likelihood of success increasing on successive iterations
+        While the output of this function is provably an upper bound (Proposition 5.4), it is almost certainly
+        a lower bound too (Remark 5.5), with the likelihood of success increasing on successive iterations
         '''
         
         if test_integers:
@@ -861,7 +861,7 @@ class ThetaSharpOperator:
         
         # If the halfweight is odd, then theta^sharp(Li_halfweight) contains \Phi_{\sigma_{halfweight}}, and that
         # is the only place that \Phi variable occurs. Hence, Li_halfweight cannot occur in any
-        # Coleman function. So we can compute the matrix in one halfweight lower.
+        # Chabauty-Kim function. So we can compute the matrix in one halfweight lower.
         
         if halfweight % 2 == 1:
             halfweight -= 1
@@ -869,6 +869,8 @@ class ThetaSharpOperator:
         matrix = self.theta_sharp_matrix_in_given_degree(halfweight, degree, True, self.random_eval_dict)
         
         return Matrix(ZZ, matrix).left_nullity()
+
+# David: suddenly there is a switch from halfweight to depth
 
 def main_parallel(depth, nprocesses):
     manager = Manager()
@@ -887,15 +889,15 @@ def main_parallel(depth, nprocesses):
 
     result = S.upper_bound_on_dimension_of_kernel(depth, 17, True, True)
     result2 = S.upper_bound_on_dimension_of_kernel(depth, 18, True, False)
-    print(f"The number of Coleman functions in depth {depth} and weight 17 is {result}")
-    print(f"The number of Coleman functions in depth {depth} and weight 18 is {result2}")
+    print(f"The number of Chabauty-Kim functions in depth {depth} and weight 17 is {result}")
+    print(f"The number of Chabauty-Kim functions in depth {depth} and weight 18 is {result2}")
 
 def main_non_parallel(depth):
     S = ThetaSharpOperator(depth, 2)
     result = S.upper_bound_on_dimension_of_kernel(depth, 17, True, True)
     result2 = S.upper_bound_on_dimension_of_kernel(depth, 18, True, False)
-    print(f"The number of Coleman functions in depth {depth} and weight 17 is {result}")
-    print(f"The number of Coleman functions in depth {depth} and weight 18 is {result2}")
+    print(f"The number of Chabauty-Kim functions in depth {depth} and weight 17 is {result}")
+    print(f"The number of Chabauty-Kim functions in depth {depth} and weight 18 is {result2}")
 
 def compute_upper_bound_on_dimension_of_kernel(depth, parallel=False, nprocesses=8):
     if parallel:
