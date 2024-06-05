@@ -121,7 +121,7 @@ class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
         # of the characters 
         w = [-1] 
 
-        # Loop till w is not empty 
+        # Loop until w is not empty 
         while w: 
 
             w[-1] += 1
