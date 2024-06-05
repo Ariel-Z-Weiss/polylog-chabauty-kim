@@ -4,6 +4,9 @@ from itertools import groupby
 import numpy
 from multiprocessing import Pool, Manager
 
+#saar: some general comment is that we may want to add some validity checks for certain parameters that are cycled through, and perhaps even type checks, to avoid unexpected behavior. 
+# We may also want to get a fixed format for the documentation, i.e. in the beginning of each function, write a few lines about what it does, then ARGS, RETURNS, YIELDS, THROWS, and so on.
+# We may wish to comment within the code what method seems to be the most costly when it comes to runtime/space complexity.
 
 class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
     """
@@ -63,10 +66,14 @@ class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
         A bug in the sage shuffle algebra package means that 'sigma_3' would be encoded as a workd of length
         7. To bypass this bug, we encode \sigma_{2n+1} by the n-th capital letter.
         """
+
+        """
+        saar: should we be accessing string.ascii_uppercase[n-1] or string.ascii_uppercase[n]? my point is to avoid accessing the -1'th entry and get some random behavior.
+        """
         return [(f'sigma{2*n + 1}', 
                  string.ascii_uppercase[n-1],
                  2*n + 1) 
-                for n in range(1, floor((halfweight - 1)/2) + 1)] 
+                for n in range(1, floor((halfweight - 1)/2) + 1)] #saar: we could use 'for n in range(1, (halfweight // 2) + 1)' instead, which i believe casts everything into integers to avoid weird behavior.
     
     def _tau_letters_and_degrees(self, number_of_primes):
         """
@@ -75,6 +82,7 @@ class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
         A bug in the sage shuffle algebra package means that 'tau_p' would be encoded as a workd of length
         7. To bypass this bug, if we encode \tau_{p_n} as the n-th lowercase letter.
         """
+
         return [(f'tau{index}',string.ascii_lowercase[index], 1)
                 for index in range(number_of_primes)]
     
@@ -119,7 +127,7 @@ class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
             w[-1] += 1
             m = len(w) 
             if m == length: 
-                yield 'S' + ''.join(letters[i] for i in w)
+                yield 'S' + ''.join(letters[i] for i in w)   #saar: why do we want this extra S at the beginning? we could alternatively do  yield ''.join(letters[i] for i in w)
                 
             # Repeating w to get a 
             # n-length string 
@@ -157,7 +165,7 @@ class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
                 break
                 
             for word in ShuffleAlgebraPolynomialRing.words_of_fixed_length(remaining_length, tau_letters):
-                yield "".join(['S', letter, word])
+                yield "".join(['S', letter, word]) #saar: same comment, i guess we are using S as some delimiter to help us parse these words later?
              
         # Add the Lyndon words not including a sigma
         yield from ShuffleAlgebraPolynomialRing.lyndon_words_of_fixed_length(length,tau_letters)
@@ -229,10 +237,9 @@ no_idea_why = ShuffleAlgebra(QQ, 'ab')
 
 class ShuffleAlgebraImproved(sage.algebras.shuffle_algebra.ShuffleAlgebra):
     """
-    This class is a reimplemantation of Sage's built in ShuffleAlgebra class, in order to include two
-    improvements:
-    1) a major efficiency saving in the built in to_dual_pbw_element function
-    2) To enable parallelisation of the to_dual_pbw_element function.
+    This class is a reimplementation of Sage's built-in ShuffleAlgebra class, with two improvements:
+    1) Major efficiency saving in the built-in to_dual_pbw_element function.
+    2) Enable parallelization of the to_dual_pbw_element function.
     """
     
     def __init__(self, R, names, prefix=None):
@@ -438,6 +445,14 @@ class ThetaSharpOperator:
             In the parallel version, we first precompute to_dual_pbw_element on every
             word that can appear in some Li(n) up to the halfweight
         """
+    """
+    saar: I believe it may be nice if we write for each function what are its arguments and what is its output, beyond the one liner which says what its for. Something like:
+        Args:
+            halfweight (int): The halfweight up to which to generate words.
+
+        Yields:
+            ShuffleAlgebraImproved: Elements to precompute to_dual_pbw_element on for Li(n). (is that correct?)
+    """
         for n in range(1, halfweight + 1):
             for tau_letter in self.tau_letters:
                 for word in ShuffleAlgebraPolynomialRing.words_of_fixed_length(n-1, self.tau_letters):
@@ -456,9 +471,21 @@ class ThetaSharpOperator:
     
     def set_random_integers(self, clear=True):
         '''
-        To enable consistent test data, assign once and for all a set of integer values on which
+        To enable consistent test data, assign once and for all a set of integer values on which 
         to evaluate the polynomials
         '''
+
+         '''
+        saar: added some documentation which should later on be merged.
+        Sets random integers for polynomial evaluation.
+
+        Args:
+            clear (bool, optional): Whether to clear any saved random li values. Defaults to True.
+
+        Returns:
+            dict: Dictionary mapping generators to random integers.
+        '''
+    
         if clear:
             # Clear any saved random li values
             self.li_values_random_dict.clear()
@@ -476,6 +503,18 @@ class ThetaSharpOperator:
         The point of including a gcd is to ensure that we are always working with integer arithmetic
         
         '''
+
+        '''
+        saar: Generates random integers for polynomial evaluation.
+
+        Args:
+            clear (bool, optional): Whether to clear any saved random li values. Defaults to True.
+            integer_range (int, optional): The range within which to generate random integers. Defaults to 100.
+
+        Returns:
+            dict: Dictionary mapping generators to random integers.
+        '''
+
         if clear:
             # Clear any saved random li values
             self.li_values_random_dict.clear()
@@ -492,6 +531,19 @@ class ThetaSharpOperator:
 
         Returns: the evaluation of the polynomial, as a rational number.
         """
+
+        """
+        saar:  Evaluates a polynomial at the entries of a dictionary.
+
+        Args:
+            polynomial (Polynomial): The polynomial to evaluate.
+            eval_dict (dict): Dictionary mapping variables to their values.
+
+        Returns:
+            Rational: The evaluation of the polynomial.
+        """
+
+
         polynomial = polynomial.polynomial(QQ)             
         evaluation = 0
         
@@ -514,6 +566,13 @@ class ThetaSharpOperator:
 
         Returns: the evaluation of the polynomial, as a rational number.
         """
+
+        """
+        saar: Evaluates a monomial at the entries of a dictionary, eval_dict.
+
+        Returns: the evaluation of the polynomial, as a rational number.
+        """
+
         evaluation = 1
 
         for variable in monomial.variables():
@@ -532,6 +591,17 @@ class ThetaSharpOperator:
         
         Returns:
         PolynomialDict: The logarithm polynomial.
+        """
+
+        """
+        saar: Returns the image of log under theta_sharp.
+
+        Args:
+            random_evaluation (bool, optional): Whether to evaluate coefficients randomly. Defaults to False.
+            eval_dict (dict, optional): Dictionary mapping variables to their values for random evaluation. Defaults to None.
+
+        Returns:
+            PolynomialDict: The logarithm polynomial.
         """
         if random_evaluation and not eval_dict:
             raise ValueError('Evaluation dictionary not passed to function')
@@ -582,6 +652,23 @@ class ThetaSharpOperator:
         Returns:
         PolynomialDict: The Li(n) polynomial.
         """
+
+         """
+        saar: this function is hellishly long, are we sure we do not want to break it into more pieces?
+        saar: Returns the image of Li_n under theta_sharp.
+
+        Args:
+            n (int): The Li number.
+            random_evaluation (bool, optional): Whether to evaluate coefficients randomly. Defaults to False.
+            eval_dict (dict, optional): Dictionary mapping variables to their values for random evaluation. Defaults to None.
+
+        Raises:
+            ValueError: If random_evaluation is True but no evaluation dictionary is provided.
+
+        Returns:
+            PolynomialDict: The Li(n) polynomial.
+        """
+        
         if random_evaluation and not eval_dict:
             raise ValueError('Evaluation dictionary not passed to function')
 
