@@ -32,11 +32,11 @@ phi0t1sub = LR.fraction_field()((LR('log') - LR('Sa*phi0t0'))/LR('Sb'))
 f6 = LR(LR('Sb')^4*f6.subs({LR('phi0t1'):phi0t1sub})) #Degree 4 in phi0t0
 f4 = LR(LR('Sb')^2*f4.subs({LR('phi0t1'):phi0t1sub})) #Degree 2 in phi0t0
 
-print('Degree of v4: ',f4.polynomial(LR('phi0t0')).degree())
-print('Degree of v6: ',f6.polynomial(LR('phi0t0')).degree())
+print('Degree of v4: ',f4.polynomial(LR('phi0t0')).degree()) #2
+print('Degree of v6: ',f6.polynomial(LR('phi0t0')).degree()) #4
 
 print('Is leading coefficient of v4 divisible by log*Li1 - 2*Li2: ', 
-      f4.polynomial(LR('phi0t0')).coefficients()[-1] % LR('log*Li1 - 2*Li2') == 0)
+      f4.polynomial(LR('phi0t0')).coefficients()[-1] % LR('log*Li1 - 2*Li2') == 0) #True
 
 print('Is leading coefficient of v6 divisible by log*Li1 - 2*Li2: ', 
-      f6.polynomial(LR('phi0t0')).coefficients()[-1] % LR('log*Li1 - 2*Li2') == 0)
+      f6.polynomial(LR('phi0t0')).coefficients()[-1] % LR('log*Li1 - 2*Li2') == 0) #True
