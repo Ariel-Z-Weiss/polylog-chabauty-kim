@@ -54,6 +54,6 @@ compute_upper_bound_on_dimension_of_kernel(depth=17, parallel=True, nprocesses=9
 compute_upper_bound_on_dimension_of_kernel(depth=6, parallel=False)
 ```
 
-**To verify Lemmas 6.7 and 6.8**
+**To verify Lemmas 6.6 and 6.7**
 
 These lemmas are verified by `verify-lemmas-6.7-and-6.8.sage'
