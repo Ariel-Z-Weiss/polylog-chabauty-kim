@@ -9,11 +9,11 @@ LR = PolynomialRing(S, len(gens), gens, order=TermOrder('wdegrevlex', degs))
 
 Li = [LR(O.log())] + [LR(O.Li(i)) for i in range(1,7)]
 
-#Elimanate phisgma5 and phisgma3 from Li6
+#Eliminate phisgma5 and phisgma3 from Li6
 f6 = Li[5].coefficient(LR('phisigma5'))*(LR('Li6') - Li[6]) - Li[6].coefficient(LR('phisigma5'))*(LR('Li5')-Li[5])
 f6 = f6.coefficient(LR('phisigma3'))*(LR('Li3') - Li[3]) - Li[3].coefficient(LR('phisigma3'))*f6
 
-#Elimanate phisgma3 from Li4
+#Eliminate phisgma3 from Li4
 f4 = Li[4].coefficient(LR('phisigma3'))*(LR('Li3')-Li[3]) - Li[3].coefficient(LR('phisigma3'))*(LR('Li4')-Li[4])
 # [Li_3 - theta#(Li3)] * (phi3 coefficient of Li4) - [Li_4 - theta#(Li4)] * (phi3 coefficient of Li3)
 
