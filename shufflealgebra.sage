@@ -1,7 +1,7 @@
 class ShuffleAlgebraImproved(sage.algebras.shuffle_algebra.ShuffleAlgebra):
     """
     This class is a reimplementation of Sage's built-in ShuffleAlgebra class, with two improvements:
-    1) Major efficiency saving in the built-in to_dual_pbw_element function.
+    1) 3x efficiency saving in the built-in to_dual_pbw_element function.
     2) Enable parallelization of the to_dual_pbw_element function.
     """
     
