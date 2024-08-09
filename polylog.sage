@@ -1,6 +1,7 @@
 import string
 import numpy
 from multiprocessing import Pool, Manager
+from functools import cache
 
 class ShuffleAlgebraPolynomialRing(sage.symbolic.ring.SymbolicRing):
     """
