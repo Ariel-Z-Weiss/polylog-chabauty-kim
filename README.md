@@ -57,3 +57,7 @@ compute_upper_bound_on_dimension_of_kernel(depth=6, parallel=False)
 **To verify Lemmas 6.6, 6.7, and 6.8**
 
 These lemmas are verified by `verify-lemmas-6.6-6.8.sage'
+
+**To compute Table 1**
+
+The entries of this table are computed by `compute_table_1.sage'
