@@ -1,4 +1,4 @@
-# The authors thank Martin Lüdtke for for sharing a preliminary version of this code, which we modified slightly.
+# The authors thank Martin Lüdtke for sharing a preliminary version of this code, which we modified slightly.
 
 """
     Given a tuple of weights (w_1, ..., w_k) and a bound N, return a list of length N+1
